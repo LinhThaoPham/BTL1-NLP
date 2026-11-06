@@ -1,0 +1,31 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+.browser_profiles/
+.selenium_cache/
+.env
+cookies.json
+.browser_profile/
+phien_ban_moi/crawl data/diagnostics/
+.tmp/
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/annotations/*
+!data/annotations/.gitkeep
+data/checkpoints/*
+!data/checkpoints/.gitkeep
+artifacts/runs/
+artifacts/qa/
+artifacts/notebook_checks/
+*.egg-info/
+phien_ban_moi/_archive/
+phien_ban_moi/data/input/
+phien_ban_moi/results/
+phien_ban_moi/preprocessing/data/
+phien_ban_moi/crawl data/*.csv
+phien_ban_moi/crawl data/backups/
+phien_ban_moi/crawl data/doi_chieu/
