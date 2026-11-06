@@ -1,0 +1,9 @@
+# Bổ sung cho phien_ban_moi/transformer (ViSoBERT); cài sau requirements.txt.
+# Torch bản GPU (~2.4 GB tải về):
+#   pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cu124
+# Hoặc bản CPU nhẹ hơn (huấn luyện chậm hơn nhiều):
+#   pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cpu
+transformers==4.57.6
+sentencepiece==0.2.3
+accelerate
+python-docx
