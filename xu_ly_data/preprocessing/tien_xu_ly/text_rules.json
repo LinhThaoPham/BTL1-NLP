@@ -1,0 +1,9 @@
+{
+  "abbreviations": {
+    "ko": "không", "khum": "không", "hong": "không", "hok": "không",
+    "khg": "không", "đc": "được", "dc": "được", "mn": "mọi người",
+    "mng": "mọi người", "cx": "cũng", "ntn": "như thế nào"
+  },
+  "stopwords": ["và", "là", "của", "thì", "ở", "những", "các"],
+  "protected_words": ["không", "chưa", "chẳng", "đừng", "chả", "đéo", "đếch", "ngu", "cút", "óc_chó"]
+}
