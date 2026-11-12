@@ -8,7 +8,7 @@ BASE = Path(__file__).resolve().parents[2]
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--input', type=Path, default=BASE / 'data/data/split_all_comments/data_split_original/train.csv')
+    parser.add_argument('--input', type=Path, default=BASE / 'data/data/split_all_comments/data_split_by_post/train.csv')
     parser.add_argument('--output', type=Path, default=BASE / 'data/data/split_all_comments/data_oversampling/train_oversampled.csv')
     parser.add_argument('--seed', type=int, default=42)
     args = parser.parse_args()
@@ -18,6 +18,8 @@ def main():
         raise ValueError('Đầu vào phải chỉ gồm các dòng thuộc tập train.')
     if not df['label'].isin(['0', '1']).all():
         raise ValueError('Nhãn phải là 0 hoặc 1.')
+    if 'is_synthetic' not in df or not df['is_synthetic'].str.strip().str.lower().isin(['true', '1']).any():
+        raise ValueError('Hãy sinh dữ liệu từ train và ghép synthetic mới trước khi oversampling.')
     toxic = df[df['label'] == '1']
     non_toxic = df[df['label'] == '0']
     if toxic.empty or non_toxic.empty or len(toxic) > len(non_toxic):

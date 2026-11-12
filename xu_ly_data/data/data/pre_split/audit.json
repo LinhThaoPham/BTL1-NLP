@@ -1,9 +1,9 @@
 {
-  "input_rows": 7067,
+  "input_rows": 6539,
   "original_input": 6539,
-  "synthetic_input": 528,
+  "synthetic_input": 0,
   "original_used": 6031,
-  "synthetic_candidates": 528,
+  "synthetic_candidates": 0,
   "original_label_counts": {
     "0": 5982,
     "1": 49
@@ -13,9 +13,5 @@
     "empty_text_or_source_or_id": 4,
     "conflicting_original_labels": 2
   },
-  "needs_review_original_input": 994,
-  "label_status": "Nhãn do file cung cấp; có nhãn ChatGPT và needs_review, chưa xem là ground truth do con người xác nhận.",
-  "combined_exclusions": {
-    "duplicate_content": 6
-  }
+  "label_status": "Nhãn từ file dữ liệu đầu vào."
 }
