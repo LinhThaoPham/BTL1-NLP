@@ -34,6 +34,7 @@ def prepare_data(path, output, tokenizer=None):
     path, output = Path(path), Path(output)
     output.mkdir(parents=True, exist_ok=True)
     frame = pd.read_csv(path, dtype=str, keep_default_na=False)
+    frame = frame.drop(columns=['needs_review', 'need_review'], errors='ignore')
     required = {"text_raw", "label", "post_url", "comment_id", "is_synthetic"}
     if not required.issubset(frame):
         raise ValueError(f"Thiếu cột: {sorted(required - set(frame))}")
@@ -47,7 +48,7 @@ def prepare_data(path, output, tokenizer=None):
     if not flags.isin(["true", "false", "1", "0"]).all():
         raise ValueError("Cột is_synthetic cần True/False hoặc 1/0.")
     frame["is_synthetic"] = flags.isin(["true", "1"])
-    for name in ("needs_review", "review_status", "source_comment_id", "synthetic_id", "split_group_id"):
+    for name in ("review_status", "source_comment_id", "synthetic_id", "split_group_id"):
         if name not in frame:
             frame[name] = ""
     frame["post_id"] = frame.post_url.map(post_identity)
@@ -102,9 +103,7 @@ def prepare_data(path, output, tokenizer=None):
         "original_used": len(real), "synthetic_candidates": len(synthetic),
         "original_label_counts": {str(k): int(v) for k, v in real.label.value_counts().items()},
         "exclusions": excluded.excluded_reason.value_counts().to_dict(),
-        "needs_review_original_input": int(((~flags.isin(["true", "1"])) &
-            pd.read_csv(path, dtype=str, keep_default_na=False).get("needs_review", pd.Series("", index=flags.index)).str.lower().eq("true")).sum()),
-        "label_status": "Nhãn do file cung cấp; có nhãn ChatGPT và needs_review, chưa xem là ground truth do con người xác nhận.",
+        "label_status": "Nhãn từ file dữ liệu đầu vào.",
     }
     if set(real.label) != {0, 1}:
         raise ValueError("Sau làm sạch không đủ hai lớp gốc; xem excluded_rows.csv.")
