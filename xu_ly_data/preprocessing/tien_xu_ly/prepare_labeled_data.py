@@ -31,9 +31,9 @@ def feature_key(text):
 
 
 def prepare_data(path, output, tokenizer=None):
-    path, output = Path(path), Path(output)
+    output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
-    frame = pd.read_csv(path, dtype=str, keep_default_na=False)
+    frame = path.copy() if isinstance(path, pd.DataFrame) else pd.read_csv(Path(path), dtype=str, keep_default_na=False)
     frame = frame.drop(columns=['needs_review', 'need_review'], errors='ignore')
     required = {"text_raw", "label", "post_url", "comment_id", "is_synthetic"}
     if not required.issubset(frame):
